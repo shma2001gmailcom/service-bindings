@@ -5,7 +5,7 @@ import com.google.common.collect.Sets;
 import com.google.gson.GsonBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.experimental.UtilityClass;
 import org.springframework.util.ReflectionUtils;
 
@@ -35,8 +35,8 @@ public class ClassMethods {
         final Map<String, Set<MethodDescription>> result = newIdentityHashMap();
         result.put(c.getName(), methods(c).stream()
                                           .map(m -> describe().apply(m))
-                                          .filter(desc -> desc.modifiers.contains("public"))
-                                          .filter(desc -> !desc.name.contains("lambda"))
+                                          .filter(desc -> desc.modifiers.contains("public") &&
+                                                          !desc.name.contains("lambda"))
                                           .collect(toSet()));
         return new GsonBuilder().setPrettyPrinting().create().toJson(result);
     }
@@ -55,7 +55,6 @@ public class ClassMethods {
     }
 
     @AllArgsConstructor
-    @Data
     @Builder
     private static class MethodDescription {
         private String name;
