@@ -5,7 +5,6 @@ import com.google.common.collect.Sets;
 import com.google.gson.GsonBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
 import lombok.experimental.UtilityClass;
 import org.springframework.util.ReflectionUtils;
 
